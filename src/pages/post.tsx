@@ -12,12 +12,17 @@ const Post = () => {
   const { userId, postId } = useParams();
   const { data: comments } = useGetCommentsQuery(Number(postId));
   const { data: user } = useGetUserQuery(Number(userId));
-  const { data: post } = useGetPostQuery(Number(postId));
+  const { data: post, isLoading } = useGetPostQuery(Number(postId));
 
   const handleClick = () => {
     if (post && user) deletePost({ postId: post.id, userId: user.id });
     navigate(`/user/${userId}`);
   };
+
+  if (isLoading)
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Loading...</div>
+    );
 
   return (
     <div className='container'>

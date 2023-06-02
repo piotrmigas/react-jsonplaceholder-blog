@@ -11,7 +11,10 @@ const User = () => {
   const { data: user } = useGetUserQuery(Number(userId));
   const { data: posts, isLoading } = useGetPostsQuery(Number(userId));
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Loading...</div>
+    );
 
   return (
     <div className='container'>
